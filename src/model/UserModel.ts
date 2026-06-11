@@ -33,4 +33,17 @@ export class UserModel {
 
     return createdUser[0] || null;
   }
+
+  async update(
+    id: string,
+    { username, email }: UserPost
+  ): Promise<User | null> {
+    const updatedUser = await db
+      .update(users)
+      .set({ username, email })
+      .where(eq(users.id, id))
+      .returning();
+
+    return updatedUser[0] || null;
+  }
 }

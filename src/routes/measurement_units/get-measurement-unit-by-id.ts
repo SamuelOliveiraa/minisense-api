@@ -1,27 +1,27 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { MeasurementUnitController } from "@/controllers/MeasurementUnitController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const getUsersByIdRoute = async (
+export const getMeasurementUnitByIdRoute = async (
   app: FastifyInstance,
-  controller: UserController
+  controller: MeasurementUnitController
 ) => {
   app.get(
     "/:id",
     {
       schema: {
-        tags: ["users"],
-        summary: "Get a User by ID",
+        tags: ["measurement_units"],
+        summary: "Get a Measurement Unit by ID",
         description:
-          "This route gets a user from the users table on the database by their ID.",
+          "This route gets a measurement unit from the measurement_units table on the database by its ID.",
         response: {
           200: z
             .object({
               id: z.string(),
-              username: z.string(),
-              email: z.email().min(2).max(100)
+              symbol: z.string(),
+              description: z.string().min(2).max(100)
             })
-            .describe("Gives a user by their ID"),
+            .describe("Gives a measurement unit by their ID"),
           404: z
             .object({
               message: z.string()
@@ -34,7 +34,9 @@ export const getUsersByIdRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         params: z.object({
-          id: z.uuid().describe("The unique identifier (UUID) of the user")
+          id: z
+            .uuid()
+            .describe("The unique identifier (UUID) of the measurement unit")
         })
       }
     },

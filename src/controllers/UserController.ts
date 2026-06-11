@@ -1,5 +1,4 @@
 import type { User, UserPost } from "@/database/types/user.ts";
-import { env } from "@/env/index.ts";
 import { UserModel } from "@/model/UserModel.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
@@ -30,10 +29,16 @@ export class UserController {
   ) => {
     try {
       const { username, email } = request.body;
+
+      if (!username || !email)
+        return reply
+          .status(400)
+          .send({ message: "Username or email is invalid" });
+
       const newUser = await this.#model.create({ username, email });
 
       if (!newUser) {
-        return reply.status(404).send({ message: "Erro to create a user" });
+        return reply.status(404).send({ message: "Error to create a user" });
       }
 
       return reply.send(newUser);
@@ -49,7 +54,12 @@ export class UserController {
     reply: FastifyReply
   ) => {
     try {
-      const user = await this.#model.show(request.params.id);
+      const { id } = request.params;
+
+      if (!id)
+        return reply.status(400).send({ message: "Id of user is invalid" });
+
+      const user = await this.#model.show(id);
 
       if (!user) return reply.status(404).send({ message: "User not found" });
 
@@ -66,12 +76,53 @@ export class UserController {
     reply: FastifyReply
   ) => {
     try {
-      const deletedUser = await this.#model.delete(request.params.id);
+      const { id } = request.params;
+
+      if (!id)
+        return reply.status(400).send({ message: "Id of user is invalid" });
+
+      const deletedUser = await this.#model.delete(id);
 
       if (!deletedUser)
         return reply.status(404).send({ message: "User not found" });
 
       return reply.send(deletedUser);
+    } catch (error) {
+      // if (env.NODE_ENV === "test") console.error(error);
+      console.error(error);
+      throw error;
+    }
+  };
+
+  update = async (
+    request: FastifyRequest<{
+      Params: { id: string };
+      Body: UserPost;
+    }>,
+    reply: FastifyReply
+  ) => {
+    try {
+      const { id } = request.params;
+
+      if (!id)
+        return reply.status(400).send({ message: "Id of user is invalid" });
+
+      const { username, email } = request.body;
+
+      if (!username || !email)
+        return reply
+          .status(400)
+          .send({ message: "Username and email are required" });
+
+      const updatedUser = await this.#model.update(id, {
+        username,
+        email
+      });
+
+      if (!updatedUser)
+        return reply.status(404).send({ message: "User not found" });
+
+      return reply.send(updatedUser);
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);

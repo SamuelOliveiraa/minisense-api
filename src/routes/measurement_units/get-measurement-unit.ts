@@ -1,30 +1,30 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { MeasurementUnitController } from "@/controllers/MeasurementUnitController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const getUsersRoute = async (
+export const getMeasurementUnitsRoute = async (
   app: FastifyInstance,
-  controller: UserController
+  controller: MeasurementUnitController
 ) => {
   app.get(
     "",
     {
       schema: {
-        tags: ["users"],
-        summary: "Get all Users",
+        tags: ["measurement_units"],
+        summary: "Get all Measurement Units",
         description:
-          "This route gets all users from the users table on the database.",
+          "This route gets all measurement units from the measurement_units table on the database.",
         response: {
           200: z.object({
-            users: z
+            measurement_units: z
               .array(
                 z.object({
                   id: z.string(),
-                  username: z.string().min(2).max(100),
-                  email: z.email().min(2).max(100)
+                  symbol: z.string(),
+                  description: z.string().min(2).max(100)
                 })
               )
-              .describe("Gives an array of users")
+              .describe("Gives an array of measurement units")
           }),
           404: z
             .object({
