@@ -5,7 +5,11 @@
   "main": "server.ts",
   "scripts": {
     "dev": "tsx --watch src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:studio": "npx drizzle-kit studio",
+    "test": "docker compose up -d db-test && cross-env NODE_ENV=test vitest --watch",
+    "test:watch": "docker compose up -d db-test && cross-env NODE_ENV=test vitest --watch"
   },
   "keywords": [],
   "author": "",
