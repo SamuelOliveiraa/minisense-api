@@ -1,5 +1,5 @@
 {
-  "id": "b085d89c-379e-42a7-ae93-0924533d3bc5",
+  "id": "c74befb2-3325-401d-aec0-88f4fae010ad",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -22,18 +22,6 @@
           "notNull": false,
           "default": "gen_random_uuid()"
         },
-        "device_id": {
-          "name": "device_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "unit_id": {
-          "name": "unit_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "label": {
           "name": "label",
           "type": "text",
@@ -44,8 +32,20 @@
           "name": "enabled",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": true
+        },
+        "device_id": {
+          "name": "device_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "unit_id": {
+          "name": "unit_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -79,6 +79,13 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
+        "data_streams_key_unique": {
+          "name": "data_streams_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "key"
+          ]
+        },
         "data_streams_label_unique": {
           "name": "data_streams_label_unique",
           "nullsNotDistinct": false,
@@ -149,18 +156,6 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "stream_id": {
-          "name": "stream_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "unit_id": {
-          "name": "unit_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "timestamp": {
           "name": "timestamp",
           "type": "integer",
@@ -170,6 +165,18 @@
         "value": {
           "name": "value",
           "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stream_id": {
+          "name": "stream_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "unit_id": {
+          "name": "unit_id",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
         }
@@ -253,13 +260,13 @@
           "name": "description",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "user_id": {
           "name": "user_id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -280,11 +287,11 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "sensor_devices_label_unique": {
-          "name": "sensor_devices_label_unique",
+        "sensor_devices_key_unique": {
+          "name": "sensor_devices_key_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "label"
+            "key"
           ]
         }
       },
@@ -320,13 +327,6 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_username_unique": {
-          "name": "users_username_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "username"
-          ]
-        },
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,

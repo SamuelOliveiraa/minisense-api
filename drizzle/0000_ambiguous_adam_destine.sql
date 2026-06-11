@@ -1,10 +1,11 @@
 CREATE TABLE "data_streams" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"key" uuid DEFAULT gen_random_uuid(),
-	"device_id" text,
-	"unit_id" text,
 	"label" text NOT NULL,
-	"enabled" boolean DEFAULT true,
+	"enabled" boolean DEFAULT true NOT NULL,
+	"device_id" uuid NOT NULL,
+	"unit_id" uuid NOT NULL,
+	CONSTRAINT "data_streams_key_unique" UNIQUE("key"),
 	CONSTRAINT "data_streams_label_unique" UNIQUE("label")
 );
 --> statement-breakpoint
@@ -18,26 +19,25 @@ CREATE TABLE "measurement_units" (
 --> statement-breakpoint
 CREATE TABLE "sensor_data" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"stream_id" text,
-	"unit_id" text,
 	"timestamp" integer NOT NULL,
-	"value" double precision NOT NULL
+	"value" double precision NOT NULL,
+	"stream_id" uuid NOT NULL,
+	"unit_id" uuid NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "sensor_devices" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"key" uuid DEFAULT gen_random_uuid(),
 	"label" text NOT NULL,
-	"description" text,
-	"user_id" text,
-	CONSTRAINT "sensor_devices_label_unique" UNIQUE("label")
+	"description" text NOT NULL,
+	"user_id" uuid NOT NULL,
+	CONSTRAINT "sensor_devices_key_unique" UNIQUE("key")
 );
 --> statement-breakpoint
 CREATE TABLE "users" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"username" text NOT NULL,
 	"email" text NOT NULL,
-	CONSTRAINT "users_username_unique" UNIQUE("username"),
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint

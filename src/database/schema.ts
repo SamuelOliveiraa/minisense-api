@@ -10,7 +10,7 @@ import {
 
 export const users = pgTable("users", {
   id: uuid().primaryKey().defaultRandom(),
-  username: text().notNull().unique(),
+  username: text().notNull(),
   email: text().notNull().unique()
 });
 
@@ -22,30 +22,42 @@ export const measurementUnits = pgTable("measurement_units", {
 
 export const sensorDevices = pgTable("sensor_devices", {
   id: uuid().primaryKey().defaultRandom(),
-  key: uuid().defaultRandom(),
-  label: text().notNull().unique(),
-  description: text(),
+  key: uuid().defaultRandom().unique(),
+  label: text().notNull(),
+  description: text().notNull(),
 
-  userId: text("user_id").references(() => users.id)
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id)
 });
 
 export const dataStreams = pgTable("data_streams", {
   id: uuid().primaryKey().defaultRandom(),
-  key: uuid().defaultRandom(),
-  deviceId: text("device_id").references(() => sensorDevices.id),
-  unitId: text("unit_id").references(() => measurementUnits.id),
+  key: uuid().defaultRandom().unique(),
   label: text().notNull().unique(),
-  enabled: boolean().default(true)
+  enabled: boolean().notNull().default(true),
+
+  deviceId: uuid("device_id")
+    .notNull()
+    .references(() => sensorDevices.id),
+  unitId: uuid("unit_id")
+    .notNull()
+    .references(() => measurementUnits.id)
 });
 
 export const sensorData = pgTable(
   "sensor_data",
   {
     id: uuid().primaryKey().defaultRandom(),
-    streamId: text("stream_id").references(() => dataStreams.id),
-    unitId: text("unit_id").references(() => measurementUnits.id),
     timestamp: integer().notNull(),
-    value: doublePrecision().notNull()
+    value: doublePrecision().notNull(),
+
+    streamId: uuid("stream_id")
+      .notNull()
+      .references(() => dataStreams.id),
+    unitId: uuid("unit_id")
+      .notNull()
+      .references(() => measurementUnits.id)
   },
   table => ({
     timestampIndex: index("timestamp_index").on(table.timestamp)
