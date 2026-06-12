@@ -40,6 +40,6 @@ export const getMeasurementUnitByIdRoute = async (
         })
       }
     },
-    controller.show
+    controller.findByID
   );
 };

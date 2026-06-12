@@ -8,7 +8,7 @@ export class UserModel {
     return await db.select().from(users).orderBy(asc(users.username));
   }
 
-  async show(id: string): Promise<User | null> {
+  async findByID(id: string): Promise<User | null> {
     const userData = await db.query.users.findFirst({
       where: eq(users.id, id)
     });

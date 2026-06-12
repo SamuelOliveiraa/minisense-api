@@ -51,7 +51,7 @@ export class MeasurementUnitController {
     }
   };
 
-  show = async (
+  findByID = async (
     request: FastifyRequest<{ Params: { id: string } }>,
     reply: FastifyReply
   ) => {
@@ -63,7 +63,7 @@ export class MeasurementUnitController {
           .status(400)
           .send({ message: "Id of measurement unit is invalid" });
 
-      const measurementUnits = await this.#model.show(id);
+      const measurementUnits = await this.#model.findByID(id);
 
       if (!measurementUnits)
         return reply

@@ -14,7 +14,7 @@ export class MeasurementUnitModel {
       .orderBy(asc(measurementUnits.symbol));
   }
 
-  async show(id: string): Promise<MeasurementUnit | null> {
+  async findByID(id: string): Promise<MeasurementUnit | null> {
     const measurementUnitData = await db.query.measurementUnits.findFirst({
       where: eq(measurementUnits.id, id)
     });

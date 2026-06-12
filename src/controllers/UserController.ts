@@ -49,7 +49,7 @@ export class UserController {
     }
   };
 
-  show = async (
+  findByID = async (
     request: FastifyRequest<{ Params: { id: string } }>,
     reply: FastifyReply
   ) => {
@@ -59,7 +59,7 @@ export class UserController {
       if (!id)
         return reply.status(400).send({ message: "Id of user is invalid" });
 
-      const user = await this.#model.show(id);
+      const user = await this.#model.findByID(id);
 
       if (!user) return reply.status(404).send({ message: "User not found" });
 

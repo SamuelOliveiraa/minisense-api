@@ -2,26 +2,26 @@ import type { UserController } from "@/controllers/UserController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const getUsersByIdRoute = async (
+export const deleteUserRoute = async (
   app: FastifyInstance,
   controller: UserController
 ) => {
-  app.get(
+  app.delete(
     "/:id",
     {
       schema: {
         tags: ["users"],
-        summary: "Get a User by ID",
+        summary: "Delete a User",
         description:
-          "This route gets a user from the users table on the database by their ID.",
+          "This route deletes a user from the users table on the database.",
         response: {
           200: z
             .object({
               id: z.string(),
-              username: z.string(),
-              email: z.email().min(2).max(100)
+              username: z.string().min(2).max(100),
+              email: z.string().min(2).max(100)
             })
-            .describe("Gives a user by their ID"),
+            .describe("Gives a user that was deleted"),
           404: z
             .object({
               message: z.string()
@@ -34,10 +34,10 @@ export const getUsersByIdRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         params: z.object({
-          id: z.uuid().describe("The unique identifier (UUID) of the user")
+          id: z.string()
         })
       }
     },
-    controller.findByID
+    controller.delete
   );
 };
