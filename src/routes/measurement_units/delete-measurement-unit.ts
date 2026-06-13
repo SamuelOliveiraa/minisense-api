@@ -24,7 +24,7 @@ export const deleteMeasurementUnitRoute = async (
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when the measurement unit is not found"),
           500: z
             .object({
               message: z.string()
@@ -33,7 +33,7 @@ export const deleteMeasurementUnitRoute = async (
         },
         params: z.object({
           id: z
-            .string()
+            .uuid()
             .describe("The unique identifier (UUID) of the measurement unit")
         })
       }

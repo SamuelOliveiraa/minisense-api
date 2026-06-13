@@ -20,11 +20,16 @@ export const updateMeasurementUnitRoute = async (
             symbol: z.string().min(2).max(100),
             description: z.string().min(2).max(100)
           }),
+          400: z
+            .object({
+              message: z.string()
+            })
+            .describe("Returned when description or symbol are missing"),
           404: z
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when the measurement unit is not found"),
           500: z
             .object({
               message: z.string()

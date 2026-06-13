@@ -15,16 +15,20 @@ export const postMeasurementUnitRoute = async (
         description:
           "This route creates a measurement unit in the measurement_units table on the database.",
         response: {
-          200: z.object({
-            id: z.uuid(),
-            symbol: z.string().min(2).max(100),
-            description: z.string().min(2).max(100)
-          }),
-          404: z
+          201: z
+            .object({
+              id: z.uuid(),
+              symbol: z.string().min(2).max(100),
+              description: z.string().min(2).max(100)
+            })
+            .describe(
+              "Returned when the measurement unit is successfully created"
+            ),
+          400: z
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when symbol or description is missing"),
           500: z
             .object({
               message: z.string()

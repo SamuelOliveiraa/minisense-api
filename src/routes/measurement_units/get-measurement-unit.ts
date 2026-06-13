@@ -26,11 +26,6 @@ export const getMeasurementUnitsRoute = async (
               )
               .describe("Gives an array of measurement units")
           }),
-          404: z
-            .object({
-              message: z.string()
-            })
-            .describe("Returned when the user provides an invalid property"),
           500: z
             .object({
               message: z.string()

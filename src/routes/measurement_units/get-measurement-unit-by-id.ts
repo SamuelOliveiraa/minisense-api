@@ -26,7 +26,7 @@ export const getMeasurementUnitByIdRoute = async (
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when the measurement unit is not found"),
           500: z
             .object({
               message: z.string()
@@ -40,6 +40,6 @@ export const getMeasurementUnitByIdRoute = async (
         })
       }
     },
-    controller.findByID
+    controller.findById
   );
 };
