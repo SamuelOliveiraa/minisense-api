@@ -1,8 +1,16 @@
 import { app } from "./app.ts";
 import { env } from "./env/index.ts";
 
-app.listen({ port: env.PORT }, () => {
-  return app.log.info({
-    message: `Server is running on port ${env.PORT}`
-  });
-});
+async function startServer() {
+  try {
+    await app.listen({ port: env.PORT, host: "0.0.0.0" });
+    app.log.info({
+      message: `Server is running on port ${env.PORT}`
+    });
+  } catch (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
+}
+
+startServer();

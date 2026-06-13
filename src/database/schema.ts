@@ -34,7 +34,7 @@ export const sensorDevices = pgTable("sensor_devices", {
 export const dataStreams = pgTable("data_streams", {
   id: uuid().primaryKey().defaultRandom(),
   key: uuid().defaultRandom().unique(),
-  label: text().notNull().unique(),
+  label: text().notNull(),
   enabled: boolean().notNull().default(true),
 
   deviceId: uuid("device_id")
@@ -54,10 +54,7 @@ export const sensorData = pgTable(
 
     streamId: uuid("stream_id")
       .notNull()
-      .references(() => dataStreams.id),
-    unitId: uuid("unit_id")
-      .notNull()
-      .references(() => measurementUnits.id)
+      .references(() => dataStreams.id)
   },
   table => ({
     timestampIndex: index("timestamp_index").on(table.timestamp)
