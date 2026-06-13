@@ -4,11 +4,13 @@ import type {
   SensorDevice,
   SensorDevicePost
 } from "@/database/types/sensor-device.ts";
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 
 export class SensorDeviceModel {
   async index(): Promise<SensorDevice[]> {
-    return await db.select().from(sensorDevices).orderBy(sensorDevices.label);
+    return await db.query.sensorDevices.findMany({
+      orderBy: asc(sensorDevices.label)
+    });
   }
 
   async findById(id: string): Promise<SensorDevice | null> {

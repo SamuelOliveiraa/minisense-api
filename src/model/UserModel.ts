@@ -8,9 +8,17 @@ export class UserModel {
     return await db.select().from(users).orderBy(asc(users.username));
   }
 
-  async findByID(id: string): Promise<User | null> {
+  async findById(id: string): Promise<User | null> {
     const userData = await db.query.users.findFirst({
       where: eq(users.id, id)
+    });
+
+    return userData || null;
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const userData = await db.query.users.findFirst({
+      where: eq(users.email, email)
     });
 
     return userData || null;
