@@ -15,18 +15,23 @@ export const postSensorDeviceRoute = async (
         description:
           "This route creates a sensor device in the sensor_devices table on the database.",
         response: {
-          200: z.object({
+          201: z.object({
             id: z.uuid(),
             key: z.uuid(),
             label: z.string().min(2).max(100),
             description: z.string().min(1).max(100),
             userId: z.uuid()
           }),
+          400: z
+            .object({
+              message: z.string()
+            })
+            .describe("Returned when required fields are missing or invalid"),
           404: z
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when the user is not found"),
           500: z
             .object({
               message: z.string()

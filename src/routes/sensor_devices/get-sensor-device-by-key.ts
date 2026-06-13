@@ -7,28 +7,47 @@ export const getSensorDeviceByKeyRoute = async (
   controller: SensorDeviceController
 ) => {
   app.get(
-    "/:key",
+    "/key/:key",
     {
       schema: {
         tags: ["sensor_devices"],
         summary: "Get a Sensor Device by Key",
         description:
-          "This route gets a sensor device from the sensor_devices table on the database by their key.",
+          "This route gets a sensor device from the sensor_devices table on the database by its key, including its data streams and latest measurements.",
         response: {
           200: z
             .object({
               id: z.uuid(),
               key: z.uuid(),
-              label: z.string().min(2).max(100),
-              description: z.string().min(1).max(100),
-              userId: z.uuid()
+              label: z.string(),
+              description: z.string(),
+              userId: z.uuid(),
+              streams: z.array(
+                z.object({
+                  id: z.uuid(),
+                  key: z.uuid(),
+                  label: z.string(),
+                  enabled: z.boolean(),
+                  unitId: z.uuid(),
+                  deviceId: z.uuid(),
+                  measurementCount: z.number(),
+                  measurements: z.array(
+                    z.object({
+                      id: z.uuid(),
+                      timestamp: z.number(),
+                      value: z.number(),
+                      streamId: z.uuid()
+                    })
+                  )
+                })
+              )
             })
-            .describe("Gives a sensor device by their key"),
+            .describe("Gives a sensor device by its key"),
           404: z
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when the sensor device is not found"),
           500: z
             .object({
               message: z.string()
@@ -37,8 +56,9 @@ export const getSensorDeviceByKeyRoute = async (
         },
         params: z.object({
           key: z
+            .string()
             .uuid()
-            .describe("The unique identifier (UUID) of the sensor device")
+            .describe("The unique key (UUID) of the sensor device")
         })
       }
     },
