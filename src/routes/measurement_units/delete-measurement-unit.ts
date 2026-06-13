@@ -15,13 +15,11 @@ export const deleteMeasurementUnitRoute = async (
         description:
           "This route deletes a measurement unit from the measurement_units table on the database.",
         response: {
-          200: z
-            .object({
-              id: z.string(),
-              symbol: z.string().min(2).max(100),
-              description: z.string().min(2).max(100)
-            })
-            .describe("Gives a measurement unit that was deleted"),
+          204: z
+            .object({})
+            .describe(
+              "Returned when the measurement unit is successfully deleted"
+            ),
           404: z
             .object({
               message: z.string()

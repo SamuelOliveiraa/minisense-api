@@ -19,7 +19,7 @@ export const getUsersRoute = async (
             users: z
               .array(
                 z.object({
-                  id: z.string(),
+                  id: z.uuid(),
                   username: z.string().min(2).max(100),
                   email: z.email().min(2).max(100)
                 })

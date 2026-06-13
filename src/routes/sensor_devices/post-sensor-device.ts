@@ -1,24 +1,26 @@
-import type { MeasurementUnitController } from "@/controllers/MeasurementUnitController.ts";
+import type { SensorDeviceController } from "@/controllers/SensorDeviceController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const postMeasurementUnitRoute = async (
+export const postSensorDeviceRoute = async (
   app: FastifyInstance,
-  controller: MeasurementUnitController
+  controller: SensorDeviceController
 ) => {
   app.post(
     "",
     {
       schema: {
-        tags: ["measurement_units"],
-        summary: "Create a Measurement Unit",
+        tags: ["sensor_devices"],
+        summary: "Create a Sensor Device",
         description:
-          "This route creates a measurement unit in the measurement_units table on the database.",
+          "This route creates a sensor device in the sensor_devices table on the database.",
         response: {
           200: z.object({
             id: z.uuid(),
-            symbol: z.string().min(2).max(100),
-            description: z.string().min(2).max(100)
+            key: z.uuid(),
+            label: z.string().min(2).max(100),
+            description: z.string().min(1).max(100),
+            userId: z.uuid()
           }),
           404: z
             .object({
@@ -32,8 +34,9 @@ export const postMeasurementUnitRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         body: z.object({
-          symbol: z.string().min(2).max(100),
-          description: z.string().min(2).max(100)
+          label: z.string().min(2).max(100),
+          description: z.string().min(1).max(100),
+          userId: z.uuid()
         })
       }
     },

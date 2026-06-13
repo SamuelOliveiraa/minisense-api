@@ -1,23 +1,25 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { SensorDeviceController } from "@/controllers/SensorDeviceController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const deleteUserRoute = async (
+export const deleteSensorDeviceRoute = async (
   app: FastifyInstance,
-  controller: UserController
+  controller: SensorDeviceController
 ) => {
   app.delete(
     "/:id",
     {
       schema: {
-        tags: ["users"],
-        summary: "Delete a User",
+        tags: ["sensor_devices"],
+        summary: "Delete a Sensor Device",
         description:
-          "This route deletes a user from the users table on the database.",
+          "This route deletes a sensor device from the sensor_devices table on the database.",
         response: {
           204: z
             .object({})
-            .describe("Returned when the user is successfully deleted"),
+            .describe(
+              "Returned when the sensor device is successfully deleted"
+            ),
           404: z
             .object({
               message: z.string()

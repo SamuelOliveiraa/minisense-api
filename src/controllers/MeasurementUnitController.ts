@@ -16,7 +16,7 @@ export class MeasurementUnitController {
     try {
       const measurementsUnits = await this.#model.index();
 
-      return reply.send(measurementsUnits);
+      return reply.send({ measurement_units: measurementsUnits });
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);
@@ -97,7 +97,7 @@ export class MeasurementUnitController {
           .status(404)
           .send({ message: "Measurement unit not found" });
 
-      return reply.send(deletedMeasurement);
+      return reply.status(204).send();
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);

@@ -1,22 +1,22 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { DataStreamController } from "@/controllers/DataStreamController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const updateUserRoute = async (
+export const updateDataStreamRoute = async (
   app: FastifyInstance,
-  controller: UserController
+  controller: DataStreamController
 ) => {
   app.put(
     "/:id",
     {
       schema: {
-        tags: ["users"],
-        summary: "Update a User",
+        tags: ["data_streams"],
+        summary: "Update a Data Stream",
         description:
-          "This route updates a user in the users table on the database.",
+          "This route updates a data stream in the data_streams table on the database.",
         response: {
           200: z.object({
-            id: z.string(),
+            id: z.uuid(),
             username: z.string().min(2).max(100),
             email: z.email()
           }),
@@ -32,7 +32,7 @@ export const updateUserRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         params: z.object({
-          id: z.string()
+          id: z.uuid()
         }),
         body: z.object({
           username: z.string().min(2).max(100),

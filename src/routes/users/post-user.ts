@@ -16,7 +16,7 @@ export const postUsersRoute = async (
           "This route creates a user in the users table on the database.",
         response: {
           200: z.object({
-            id: z.string(),
+            id: z.uuid(),
             username: z.string().min(2).max(100),
             email: z.email().min(2).max(100)
           }),

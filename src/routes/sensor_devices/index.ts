@@ -1,0 +1,17 @@
+import { SensorDeviceController } from "@/controllers/SensorDeviceController.ts";
+import type { FastifyInstance } from "fastify";
+import { getSensorDevicesRoute } from "./get-sensor-devices.ts";
+import { getSensorDeviceByIdRoute } from "./get-sensor-device-by-id.ts";
+import { getSensorDeviceByKeyRoute } from "./get-sensor-device-by-key.ts";
+import { postSensorDeviceRoute } from "./post-sensor-device.ts";
+import { deleteSensorDeviceRoute } from "./delete-sensor-device.ts";
+
+export default async function sensorDeviceRoute(app: FastifyInstance) {
+  const controller = new SensorDeviceController();
+
+  await getSensorDevicesRoute(app, controller);
+  await getSensorDeviceByIdRoute(app, controller);
+  await getSensorDeviceByKeyRoute(app, controller);
+  await postSensorDeviceRoute(app, controller);
+  await deleteSensorDeviceRoute(app, controller);
+}

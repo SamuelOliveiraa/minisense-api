@@ -1,4 +1,4 @@
-import type { User, UserPost } from "@/database/types/user.ts";
+import type { UserPost } from "@/database/types/user.ts";
 import { UserModel } from "@/model/UserModel.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
@@ -86,7 +86,7 @@ export class UserController {
       if (!deletedUser)
         return reply.status(404).send({ message: "User not found" });
 
-      return reply.send(deletedUser);
+      return reply.status(204).send();
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);

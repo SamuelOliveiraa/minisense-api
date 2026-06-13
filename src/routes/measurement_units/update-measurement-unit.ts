@@ -16,7 +16,7 @@ export const updateMeasurementUnitRoute = async (
           "This route updates a measurement unit in the measurement_units table on the database.",
         response: {
           200: z.object({
-            id: z.string(),
+            id: z.uuid(),
             symbol: z.string().min(2).max(100),
             description: z.string().min(2).max(100)
           }),
@@ -32,7 +32,7 @@ export const updateMeasurementUnitRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         params: z.object({
-          id: z.string()
+          id: z.uuid()
         }),
         body: z.object({
           symbol: z.string().min(2).max(100),

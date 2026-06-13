@@ -1,24 +1,24 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { DataStreamController } from "@/controllers/DataStreamController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const postUsersRoute = async (
+export const postDataStreamRoute = async (
   app: FastifyInstance,
-  controller: UserController
+  controller: DataStreamController
 ) => {
   app.post(
     "",
     {
       schema: {
-        tags: ["users"],
-        summary: "Create a User",
+        tags: ["data_streams"],
+        summary: "Create a Data Stream",
         description:
-          "This route creates a user in the users table on the database.",
+          "This route creates a data stream in the data_streams table on the database.",
         response: {
           200: z.object({
-            id: z.string(),
-            username: z.string().min(2).max(100),
-            email: z.email().min(2).max(100)
+            id: z.uuid(),
+            name: z.string().min(2).max(100),
+            description: z.string().min(2).max(100)
           }),
           404: z
             .object({

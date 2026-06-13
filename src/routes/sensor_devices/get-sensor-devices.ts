@@ -1,30 +1,32 @@
-import type { MeasurementUnitController } from "@/controllers/MeasurementUnitController.ts";
+import type { SensorDeviceController } from "@/controllers/SensorDeviceController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const getMeasurementUnitsRoute = async (
+export const getSensorDevicesRoute = async (
   app: FastifyInstance,
-  controller: MeasurementUnitController
+  controller: SensorDeviceController
 ) => {
   app.get(
     "",
     {
       schema: {
-        tags: ["measurement_units"],
-        summary: "Get all Measurement Units",
+        tags: ["sensor_devices"],
+        summary: "Get all Sensor Devices",
         description:
-          "This route gets all measurement units from the measurement_units table on the database.",
+          "This route gets all sensor devices from the sensor_devices table on the database.",
         response: {
           200: z.object({
-            measurement_units: z
+            sensor_devices: z
               .array(
                 z.object({
                   id: z.uuid(),
-                  symbol: z.string(),
-                  description: z.string().min(2).max(100)
+                  key: z.uuid(),
+                  label: z.string().min(2).max(100),
+                  description: z.string().min(1).max(100),
+                  userId: z.uuid()
                 })
               )
-              .describe("Gives an array of measurement units")
+              .describe("Gives an array of sensor devices")
           }),
           404: z
             .object({

@@ -1,4 +1,4 @@
-import { DataStreamModel } from "@/model/DataStream.ts";
+import { DataStreamModel } from "@/model/DataStreamModel.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export class DataStreamController {
@@ -28,11 +28,14 @@ export class DataStreamController {
       const { id } = request.params;
 
       if (!id)
-        return reply.status(400).send({ message: "Id of data stream is invalid" });
+        return reply
+          .status(400)
+          .send({ message: "Id of data stream is invalid" });
 
       const dataStream = await this.#model.findByID(id);
 
-      if (!dataStream) return reply.status(404).send({ message: "Data Stream not found" });
+      if (!dataStream)
+        return reply.status(404).send({ message: "Data Stream not found" });
 
       return reply.send(dataStream);
     } catch (error) {
@@ -50,11 +53,14 @@ export class DataStreamController {
       const { key } = request.params;
 
       if (!key)
-        return reply.status(400).send({ message: "Key of data stream is invalid" });
+        return reply
+          .status(400)
+          .send({ message: "Key of data stream is invalid" });
 
       const dataStream = await this.#model.findByKey(key);
 
-      if (!dataStream) return reply.status(404).send({ message: "Data Stream not found" });
+      if (!dataStream)
+        return reply.status(404).send({ message: "Data Stream not found" });
 
       return reply.send(dataStream);
     } catch (error) {

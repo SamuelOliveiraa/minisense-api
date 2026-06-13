@@ -10,21 +10,21 @@ export const getDataStreamsRoute = async (
     "",
     {
       schema: {
-        tags: ["data_stream"],
-        summary: "Get all ",
+        tags: ["data_streams"],
+        summary: "Get all Data Streams",
         description:
-          "This route gets all  from the  table on the database.",
+          "This route gets all data streams from the data_streams table on the database.",
         response: {
           200: z.object({
-            users: z
+            data_streams: z
               .array(
                 z.object({
-                  id: z.string(),
+                  id: z.uuid(),
                   key: z.string(),
                   label: z.string().min(2).max(100),
                   enabled: z.boolean(),
-                  deviceId: z.string(),
-                  unitId: z.string(),
+                  deviceid: z.uuid(),
+                  unitid: z.uuid()
                 })
               )
               .describe("Gives an array of ")

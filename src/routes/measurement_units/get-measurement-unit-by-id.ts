@@ -17,7 +17,7 @@ export const getMeasurementUnitByIdRoute = async (
         response: {
           200: z
             .object({
-              id: z.string(),
+              id: z.uuid(),
               symbol: z.string(),
               description: z.string().min(2).max(100)
             })

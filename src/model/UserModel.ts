@@ -26,12 +26,12 @@ export class UserModel {
   }
 
   async create({ username, email }: UserPost): Promise<User | null> {
-    const createdUser = await db
+    const newUser = await db
       .insert(users)
       .values({ username, email })
       .returning();
 
-    return createdUser[0] || null;
+    return newUser[0] || null;
   }
 
   async update(

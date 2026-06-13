@@ -1,17 +1,13 @@
-import { UserController } from "@/controllers/UserController.ts";
+import { DataStreamController } from "@/controllers/DataStreamController.ts";
 import type { FastifyInstance } from "fastify";
-import { getUsersRoute } from "./get-users.ts";
-import { postUsersRoute } from "./post-user.ts";
-import { deleteUserRoute } from "./delete-user.ts";
-import { getUsersByIdRoute } from "./get-users-by-id.ts";
-import { updateUserRoute } from "./update-user.ts";
+import { deleteDataStreamRoute } from "./delete-user.ts";
+import { getDataStreamByIdRoute } from "./get-users-by-id.ts";
+import { getDataStreamsRoute } from "./get-data-streams.ts";
 
 export default async function usersRoute(app: FastifyInstance) {
-  const controller = new UserController();
+  const controller = new DataStreamController();
 
-  await getUsersRoute(app, controller);
-  await postUsersRoute(app, controller);
-  await deleteUserRoute(app, controller);
-  await getUsersByIdRoute(app, controller);
-  await updateUserRoute(app, controller);
+  await deleteDataStreamRoute(app, controller);
+  await getDataStreamByIdRoute(app, controller);
+  await getDataStreamsRoute(app, controller);
 }

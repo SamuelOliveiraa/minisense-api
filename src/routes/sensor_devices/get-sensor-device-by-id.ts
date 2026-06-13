@@ -1,27 +1,29 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { SensorDeviceController } from "@/controllers/SensorDeviceController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const getUsersByIdRoute = async (
+export const getSensorDeviceByIdRoute = async (
   app: FastifyInstance,
-  controller: UserController
+  controller: SensorDeviceController
 ) => {
   app.get(
     "/:id",
     {
       schema: {
-        tags: ["users"],
-        summary: "Get a User by ID",
+        tags: ["sensor_devices"],
+        summary: "Get a Sensor Device by ID",
         description:
-          "This route gets a user from the users table on the database by their ID.",
+          "This route gets a sensor device from the sensor_devices table on the database by their ID.",
         response: {
           200: z
             .object({
               id: z.uuid(),
-              username: z.string(),
-              email: z.email().min(2).max(100)
+              key: z.uuid(),
+              label: z.string().min(2).max(100),
+              description: z.string().min(1).max(100),
+              userId: z.uuid()
             })
-            .describe("Gives a user by their ID"),
+            .describe("Gives a sensor device by their ID"),
           404: z
             .object({
               message: z.string()
@@ -34,7 +36,9 @@ export const getUsersByIdRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         params: z.object({
-          id: z.uuid().describe("The unique identifier (UUID) of the user")
+          id: z
+            .uuid()
+            .describe("The unique identifier (UUID) of the sensor device")
         })
       }
     },

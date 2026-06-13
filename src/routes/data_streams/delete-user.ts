@@ -1,27 +1,23 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { DataStreamController } from "@/controllers/DataStreamController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const deleteUserRoute = async (
+export const deleteDataStreamRoute = async (
   app: FastifyInstance,
-  controller: UserController
+  controller: DataStreamController
 ) => {
   app.delete(
     "/:id",
     {
       schema: {
-        tags: ["users"],
-        summary: "Delete a User",
+        tags: ["data_streams"],
+        summary: "Delete a Data Stream",
         description:
-          "This route deletes a user from the users table on the database.",
+          "This route deletes a data stream from the data_streams table on the database.",
         response: {
-          200: z
-            .object({
-              id: z.string(),
-              username: z.string().min(2).max(100),
-              email: z.string().min(2).max(100)
-            })
-            .describe("Gives a user that was deleted"),
+          204: z
+            .object({})
+            .describe("Returned when the data stream is successfully deleted"),
           404: z
             .object({
               message: z.string()
@@ -34,7 +30,7 @@ export const deleteUserRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         params: z.object({
-          id: z.string()
+          id: z.uuid()
         })
       }
     },

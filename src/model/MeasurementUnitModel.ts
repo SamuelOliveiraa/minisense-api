@@ -11,7 +11,7 @@ export class MeasurementUnitModel {
     return await db
       .select()
       .from(measurementUnits)
-      .orderBy(asc(measurementUnits.symbol));
+      .orderBy(asc(measurementUnits.description));
   }
 
   async findByID(id: string): Promise<MeasurementUnit | null> {
@@ -35,12 +35,12 @@ export class MeasurementUnitModel {
     symbol,
     description
   }: MeasurementUnitPost): Promise<MeasurementUnit | null> {
-    const createdMeasurementUnit = await db
+    const newMeasurementUnit = await db
       .insert(measurementUnits)
       .values({ description, symbol })
       .returning();
 
-    return createdMeasurementUnit[0] || null;
+    return newMeasurementUnit[0] || null;
   }
 
   async update(
