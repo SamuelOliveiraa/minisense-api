@@ -20,11 +20,18 @@ export const updateUserRoute = async (
             username: z.string().min(2).max(100),
             email: z.email()
           }),
+          400: z
+            .object({
+              message: z.string()
+            })
+            .describe(
+              "Returned when username/email are missing or email already exists"
+            ),
           404: z
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when the user is not found"),
           500: z
             .object({
               message: z.string()

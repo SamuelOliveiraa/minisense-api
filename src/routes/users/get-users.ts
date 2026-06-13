@@ -26,11 +26,6 @@ export const getUsersRoute = async (
               )
               .describe("Gives an array of users")
           }),
-          404: z
-            .object({
-              message: z.string()
-            })
-            .describe("Returned when the user provides an invalid property"),
           500: z
             .object({
               message: z.string()

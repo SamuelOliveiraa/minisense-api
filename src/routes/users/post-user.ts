@@ -2,7 +2,7 @@ import type { UserController } from "@/controllers/UserController.ts";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 
-export const postUsersRoute = async (
+export const postUserRoute = async (
   app: FastifyInstance,
   controller: UserController
 ) => {
@@ -15,16 +15,20 @@ export const postUsersRoute = async (
         description:
           "This route creates a user in the users table on the database.",
         response: {
-          200: z.object({
-            id: z.uuid(),
-            username: z.string().min(2).max(100),
-            email: z.email().min(2).max(100)
-          }),
-          404: z
+          201: z
+            .object({
+              id: z.uuid(),
+              username: z.string().min(2).max(100),
+              email: z.email().min(2).max(100)
+            })
+            .describe("Returned when the user is successfully created"),
+          400: z
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe(
+              "Returned when username or email is missing, or email already exists"
+            ),
           500: z
             .object({
               message: z.string()

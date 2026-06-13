@@ -22,7 +22,7 @@ export const deleteUserRoute = async (
             .object({
               message: z.string()
             })
-            .describe("Returned when the user provides an invalid property"),
+            .describe("Returned when the user is not found"),
           500: z
             .object({
               message: z.string()
