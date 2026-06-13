@@ -33,15 +33,20 @@ export class UserController {
       if (!username || !email)
         return reply
           .status(400)
-          .send({ message: "Username or email is invalid" });
+          .send({ message: "Username or email is required" });
+
+      const existingUser = await this.#model.findByEmail(email);
+
+      if (existingUser)
+        return reply.status(400).send({ message: "E-mail already exists" });
 
       const newUser = await this.#model.create({ username, email });
 
       if (!newUser) {
-        return reply.status(404).send({ message: "Error to create a user" });
+        return reply.status(500).send({ message: "Error to create a user" });
       }
 
-      return reply.send(newUser);
+      return reply.status(201).send(newUser);
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);
@@ -49,7 +54,7 @@ export class UserController {
     }
   };
 
-  findByID = async (
+  findById = async (
     request: FastifyRequest<{ Params: { id: string } }>,
     reply: FastifyReply
   ) => {
@@ -57,9 +62,9 @@ export class UserController {
       const { id } = request.params;
 
       if (!id)
-        return reply.status(400).send({ message: "Id of user is invalid" });
+        return reply.status(400).send({ message: "Id of user is required" });
 
-      const user = await this.#model.findByID(id);
+      const user = await this.#model.findById(id);
 
       if (!user) return reply.status(404).send({ message: "User not found" });
 
@@ -79,7 +84,7 @@ export class UserController {
       const { id } = request.params;
 
       if (!id)
-        return reply.status(400).send({ message: "Id of user is invalid" });
+        return reply.status(400).send({ message: "Id of user is required" });
 
       const deletedUser = await this.#model.delete(id);
 
@@ -105,7 +110,7 @@ export class UserController {
       const { id } = request.params;
 
       if (!id)
-        return reply.status(400).send({ message: "Id of user is invalid" });
+        return reply.status(400).send({ message: "Id of user is required" });
 
       const { username, email } = request.body;
 
@@ -113,6 +118,11 @@ export class UserController {
         return reply
           .status(400)
           .send({ message: "Username and email are required" });
+
+      const existingUser = await this.#model.findByEmail(email);
+
+      if (existingUser && existingUser.id !== id)
+        return reply.status(400).send({ message: "E-mail already exists" });
 
       const updatedUser = await this.#model.update(id, {
         username,

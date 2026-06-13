@@ -34,16 +34,16 @@ export class MeasurementUnitController {
       if (!symbol || !description)
         return reply
           .status(400)
-          .send({ message: "Symbol or description is invalid" });
+          .send({ message: "Symbol or description is required" });
 
       const measurementUnit = await this.#model.create(request.body);
 
       if (!measurementUnit)
         return reply
-          .status(404)
+          .status(500)
           .send({ message: "Error to create a measurement unit" });
 
-      return reply.send(measurementUnit);
+      return reply.status(201).send(measurementUnit);
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);
@@ -51,7 +51,7 @@ export class MeasurementUnitController {
     }
   };
 
-  findByID = async (
+  findById = async (
     request: FastifyRequest<{ Params: { id: string } }>,
     reply: FastifyReply
   ) => {
@@ -61,16 +61,16 @@ export class MeasurementUnitController {
       if (!id)
         return reply
           .status(400)
-          .send({ message: "Id of measurement unit is invalid" });
+          .send({ message: "Id of measurement unit is required" });
 
-      const measurementUnits = await this.#model.findByID(id);
+      const measurementUnit = await this.#model.findById(id);
 
-      if (!measurementUnits)
+      if (!measurementUnit)
         return reply
           .status(404)
           .send({ message: "Measurement unit not found" });
 
-      return reply.send(measurementUnits);
+      return reply.send(measurementUnit);
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);
@@ -88,7 +88,7 @@ export class MeasurementUnitController {
       if (!id)
         return reply
           .status(400)
-          .send({ message: "Id of measurement unit is invalid" });
+          .send({ message: "Id of measurement unit is required" });
 
       const deletedMeasurement = await this.#model.delete(id);
 
@@ -118,7 +118,7 @@ export class MeasurementUnitController {
       if (!id)
         return reply
           .status(400)
-          .send({ message: "Id of measurement unit is invalid" });
+          .send({ message: "Id of measurement unit is required" });
 
       const { description, symbol } = request.body;
 
