@@ -20,14 +20,14 @@ export const getDataStreamsRoute = async (
               .array(
                 z.object({
                   id: z.uuid(),
-                  key: z.string(),
+                  key: z.uuid(),
                   label: z.string().min(2).max(100),
                   enabled: z.boolean(),
-                  deviceid: z.uuid(),
-                  unitid: z.uuid()
+                  deviceId: z.uuid(),
+                  unitId: z.uuid()
                 })
               )
-              .describe("Gives an array of ")
+              .describe("Gives an array of data streams")
           }),
           404: z
             .object({
