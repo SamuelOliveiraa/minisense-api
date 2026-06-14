@@ -1,6 +1,7 @@
 import { app } from "./app.ts";
 import { env } from "./env/index.ts";
 
+// Local development
 async function startServer() {
   try {
     await app.listen({ port: env.PORT, host: "0.0.0.0" });
@@ -13,4 +14,12 @@ async function startServer() {
   }
 }
 
-startServer();
+// Vercel handler
+export default async function handler(req: any, res: any) {
+  await app.ready();
+  app.server.emit("request", req, res);
+}
+
+if (env.NODE_ENV !== "production") {
+  startServer();
+}
