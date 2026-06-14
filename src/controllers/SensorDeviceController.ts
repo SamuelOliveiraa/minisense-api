@@ -1,4 +1,5 @@
 import type { SensorDevicePost } from "@/database/types/sensor-device.ts";
+import { env } from "@/env/index.ts";
 import { DataStreamModel } from "@/model/DataStreamModel.ts";
 import { SensorDataModel } from "@/model/SensorDataModel.ts";
 import { SensorDeviceModel } from "@/model/SensorDeviceModel.ts";
@@ -35,8 +36,7 @@ export class SensorDeviceController {
 
       return reply.send(devicesWithStreams);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -105,8 +105,7 @@ export class SensorDeviceController {
 
       return reply.status(201).send(newSensorDevice);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -132,8 +131,7 @@ export class SensorDeviceController {
 
       return reply.send(sensorDevice);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -161,8 +159,7 @@ export class SensorDeviceController {
 
       return reply.send({ ...sensorDevice, streams });
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -188,8 +185,7 @@ export class SensorDeviceController {
 
       return reply.status(204).send();
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };

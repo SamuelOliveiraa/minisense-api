@@ -1,4 +1,5 @@
 import type { UserPost } from "@/database/types/user.ts";
+import { env } from "@/env/index.ts";
 import { UserModel } from "@/model/UserModel.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
@@ -15,8 +16,7 @@ export class UserController {
 
       return reply.send(users);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -48,8 +48,7 @@ export class UserController {
 
       return reply.status(201).send(newUser);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -70,8 +69,7 @@ export class UserController {
 
       return reply.send(user);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -93,8 +91,7 @@ export class UserController {
 
       return reply.status(204).send();
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -134,8 +131,7 @@ export class UserController {
 
       return reply.send(updatedUser);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };

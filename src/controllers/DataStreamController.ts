@@ -65,7 +65,7 @@ export class DataStreamController {
         }))
       });
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -112,7 +112,7 @@ export class DataStreamController {
 
       return reply.status(201).send(dataStream);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };

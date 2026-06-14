@@ -2,6 +2,7 @@ import type {
   MeasurementUnit,
   MeasurementUnitPost
 } from "@/database/types/measurement-unit.ts";
+import { env } from "@/env/index.ts";
 import { MeasurementUnitModel } from "@/model/MeasurementUnitModel.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
@@ -18,8 +19,7 @@ export class MeasurementUnitController {
 
       return reply.send(measurementsUnits);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -45,8 +45,7 @@ export class MeasurementUnitController {
 
       return reply.status(201).send(measurementUnit);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -72,8 +71,7 @@ export class MeasurementUnitController {
 
       return reply.send(measurementUnit);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -99,8 +97,7 @@ export class MeasurementUnitController {
 
       return reply.status(204).send();
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
@@ -139,8 +136,7 @@ export class MeasurementUnitController {
 
       return reply.send(updatedMeasurementUnit);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };

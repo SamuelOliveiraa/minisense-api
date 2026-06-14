@@ -17,7 +17,7 @@ export const updateMeasurementUnitRoute = async (
         response: {
           200: z.object({
             id: z.uuid(),
-            symbol: z.string().min(2).max(100),
+            symbol: z.string().max(100),
             description: z.string().min(2).max(100)
           }),
           400: z
@@ -40,7 +40,7 @@ export const updateMeasurementUnitRoute = async (
           id: z.uuid()
         }),
         body: z.object({
-          symbol: z.string().min(2).max(100),
+          symbol: z.string().max(100),
           description: z.string().min(2).max(100)
         })
       }

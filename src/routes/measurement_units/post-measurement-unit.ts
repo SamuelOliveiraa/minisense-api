@@ -18,7 +18,7 @@ export const postMeasurementUnitRoute = async (
           201: z
             .object({
               id: z.uuid(),
-              symbol: z.string().min(2).max(100),
+              symbol: z.string().max(100),
               description: z.string().min(2).max(100)
             })
             .describe(
@@ -36,7 +36,7 @@ export const postMeasurementUnitRoute = async (
             .describe("Returned when an unexpected server error occurs")
         },
         body: z.object({
-          symbol: z.string().min(2).max(100),
+          symbol: z.string().max(100),
           description: z.string().min(2).max(100)
         })
       }

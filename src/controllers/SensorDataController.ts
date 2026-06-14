@@ -2,6 +2,7 @@ import type { SensorDataPost } from "@/database/types/sensor-data.ts";
 import { SensorDataModel } from "@/model/SensorDataModel.ts";
 import { DataStreamModel } from "@/model/DataStreamModel.ts";
 import type { FastifyReply, FastifyRequest } from "fastify";
+import { env } from "@/env/index.ts";
 
 export class SensorDataController {
   #model: SensorDataModel;
@@ -28,8 +29,7 @@ export class SensorDataController {
 
       return reply.send(measurements);
     } catch (error) {
-      // if (env.NODE_ENV === "test") console.error(error);
-      console.error(error);
+      if (env.NODE_ENV === "test") console.error(error);
       throw error;
     }
   };
