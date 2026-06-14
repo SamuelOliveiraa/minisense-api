@@ -15,17 +15,15 @@ export const getMeasurementUnitsRoute = async (
         description:
           "This route gets all measurement units from the measurement_units table on the database.",
         response: {
-          200: z.object({
-            measurement_units: z
-              .array(
-                z.object({
-                  id: z.uuid(),
-                  symbol: z.string(),
-                  description: z.string().min(2).max(100)
-                })
-              )
-              .describe("Gives an array of measurement units")
-          }),
+          200: z
+            .array(
+              z.object({
+                id: z.uuid(),
+                symbol: z.string(),
+                description: z.string().min(2).max(100)
+              })
+            )
+            .describe("Gives an array of measurement units"),
           500: z
             .object({
               message: z.string()

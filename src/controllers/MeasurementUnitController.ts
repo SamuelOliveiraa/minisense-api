@@ -16,7 +16,7 @@ export class MeasurementUnitController {
     try {
       const measurementsUnits = await this.#model.index();
 
-      return reply.send({ measurement_units: measurementsUnits });
+      return reply.send(measurementsUnits);
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
       console.error(error);

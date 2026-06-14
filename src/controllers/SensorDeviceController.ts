@@ -33,11 +33,40 @@ export class SensorDeviceController {
         })
       );
 
-      return reply.send({
-        sensor_devices: devicesWithStreams
-      });
+      return reply.send(devicesWithStreams);
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);
+      console.error(error);
+      throw error;
+    }
+  };
+
+  findByUserId = async (
+    request: FastifyRequest<{ Params: { userId: string } }>,
+    reply: FastifyReply
+  ) => {
+    try {
+      const { userId } = request.params;
+
+      if (!userId) {
+        return reply.status(400).send({ message: "User ID is required" });
+      }
+
+      const sensorDevices = await this.#model.findByUserId(userId);
+
+      const devicesWithStreams = await Promise.all(
+        sensorDevices.map(async sensorDevice => {
+          const streams = await this.buildStreamsResponse(sensorDevice.id);
+
+          return {
+            ...sensorDevice,
+            streams
+          };
+        })
+      );
+
+      return reply.send(devicesWithStreams);
+    } catch (error) {
       console.error(error);
       throw error;
     }
@@ -187,7 +216,10 @@ export class SensorDeviceController {
         return {
           ...stream,
           measurementCount,
-          measurements
+          measurements: measurements.map(measurement => ({
+            timestamp: measurement.timestamp,
+            value: measurement.value
+          }))
         };
       })
     );

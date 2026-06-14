@@ -1,0 +1,257 @@
+{
+  "__export_format": 4,
+  "__export_date": "2024-05-20T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v9.0.0",
+  "resources": [
+    {
+      "_id": "wrk_minisense",
+      "parentId": null,
+      "modified": 1716163200000,
+      "created": 1716163200000,
+      "name": "Minisense API",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_minisense",
+      "modified": 1716163200000,
+      "created": 1716163200000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3333"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1716163200000,
+      "_type": "environment"
+    },
+    {
+      "_id": "fld_users",
+      "parentId": "wrk_minisense",
+      "name": "Users",
+      "environment": { "resource": "/users" },
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_units",
+      "parentId": "wrk_minisense",
+      "name": "Measurement Units",
+      "environment": { "resource": "/measurement-units" },
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_devices",
+      "parentId": "wrk_minisense",
+      "name": "Sensor Devices",
+      "environment": { "resource": "/sensor-devices" },
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_data",
+      "parentId": "wrk_minisense",
+      "name": "Sensor Data",
+      "environment": { "resource": "/sensor-data" },
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_streams",
+      "parentId": "wrk_minisense",
+      "name": "Data Streams",
+      "environment": { "resource": "/data-streams" },
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_users_list",
+      "parentId": "fld_users",
+      "url": "{{ _.base_url }}{{ _.resource }}",
+      "name": "List Users",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_users_get",
+      "parentId": "fld_users",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Get User by ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_users_create",
+      "parentId": "fld_users",
+      "url": "{{ _.base_url }}{{ _.resource }}",
+      "name": "Create User",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"username\": \"John Doe\", \"email\": \"john@example.com\"}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_users_update",
+      "parentId": "fld_users",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Update User",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"username\": \"John Updated\", \"email\": \"john@example.com\"}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_users_delete",
+      "parentId": "fld_users",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Delete User",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "req_units_list",
+      "parentId": "fld_units",
+      "url": "{{ _.base_url }}{{ _.resource }}",
+      "name": "List Units",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_units_get",
+      "parentId": "fld_units",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Get Unit by ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_units_create",
+      "parentId": "fld_units",
+      "url": "{{ _.base_url }}{{ _.resource }}",
+      "name": "Create Unit",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"symbol\": \"°C\", \"description\": \"Celsius\"}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_units_update",
+      "parentId": "fld_units",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Update Unit",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"symbol\": \"°F\", \"description\": \"Fahrenheit\"}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_units_delete",
+      "parentId": "fld_units",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Delete Unit",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "req_devices_list",
+      "parentId": "fld_devices",
+      "url": "{{ _.base_url }}{{ _.resource }}",
+      "name": "List Devices",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_devices_get_id",
+      "parentId": "fld_devices",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Get Device by ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_devices_get_key",
+      "parentId": "fld_devices",
+      "url": "{{ _.base_url }}{{ _.resource }}/key/:key",
+      "name": "Get Device by Key",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_devices_create",
+      "parentId": "fld_devices",
+      "url": "{{ _.base_url }}{{ _.resource }}",
+      "name": "Create Device",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"label\": \"Living Room Sensor\", \"description\": \"Temp sensor\", \"userId\": \"UUID_HERE\"}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_devices_delete",
+      "parentId": "fld_devices",
+      "url": "{{ _.base_url }}{{ _.resource }}/:id",
+      "name": "Delete Device",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "req_data_get",
+      "parentId": "fld_data",
+      "url": "{{ _.base_url }}{{ _.resource }}/:key",
+      "name": "Get Data by Stream Key",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_data_create",
+      "parentId": "fld_data",
+      "url": "{{ _.base_url }}{{ _.resource }}/:key",
+      "name": "Create Sensor Data",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"value\": 25.5, \"timestamp\": 1716163200}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_streams_list",
+      "parentId": "fld_streams",
+      "url": "{{ _.base_url }}{{ _.resource }}",
+      "name": "List Streams",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_streams_get",
+      "parentId": "fld_streams",
+      "url": "{{ _.base_url }}{{ _.resource }}/:key",
+      "name": "Get Stream by Key",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_streams_create",
+      "parentId": "fld_streams",
+      "url": "{{ _.base_url }}{{ _.resource }}/:deviceKey",
+      "name": "Create Stream",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"label\": \"Temperature\", \"unitId\": \"UUID_HERE\"}"
+      },
+      "_type": "request"
+    }
+  ]
+}

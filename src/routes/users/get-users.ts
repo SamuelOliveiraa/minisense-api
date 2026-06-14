@@ -15,17 +15,15 @@ export const getUsersRoute = async (
         description:
           "This route gets all users from the users table on the database.",
         response: {
-          200: z.object({
-            users: z
-              .array(
-                z.object({
-                  id: z.uuid(),
-                  username: z.string().min(2).max(100),
-                  email: z.email().min(2).max(100)
-                })
-              )
-              .describe("Gives an array of users")
-          }),
+          200: z
+            .array(
+              z.object({
+                id: z.uuid(),
+                username: z.string().min(2).max(100),
+                email: z.string().email().min(2).max(100)
+              })
+            )
+            .describe("Gives an array of users"),
           500: z
             .object({
               message: z.string()

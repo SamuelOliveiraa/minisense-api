@@ -23,7 +23,7 @@ export class DataStreamController {
     try {
       const dataStreams = await this.#model.index();
 
-      return reply.send({ data_streams: dataStreams });
+      return reply.send(dataStreams);
     } catch (error) {
       if (env.NODE_ENV === "test") console.error(error);
       throw error;
@@ -59,7 +59,10 @@ export class DataStreamController {
       return reply.send({
         ...dataStream,
         measurementCount,
-        measurements
+        measurements: measurements.map(measurement => ({
+          timestamp: measurement.timestamp,
+          value: measurement.value
+        }))
       });
     } catch (error) {
       // if (env.NODE_ENV === "test") console.error(error);

@@ -33,10 +33,8 @@ export const getSensorDeviceByKeyRoute = async (
                   measurementCount: z.number(),
                   measurements: z.array(
                     z.object({
-                      id: z.uuid(),
                       timestamp: z.number(),
-                      value: z.number(),
-                      streamId: z.uuid()
+                      value: z.number()
                     })
                   )
                 })

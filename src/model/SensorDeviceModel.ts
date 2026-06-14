@@ -29,6 +29,13 @@ export class SensorDeviceModel {
     return sensorDeviceData || null;
   }
 
+  async findByUserId(userId: string): Promise<SensorDevice[]> {
+    return await db.query.sensorDevices.findMany({
+      where: eq(sensorDevices.userId, userId),
+      orderBy: asc(sensorDevices.label)
+    });
+  }
+
   async delete(id: string): Promise<SensorDevice | null> {
     const deletedSensorDevice = await db
       .delete(sensorDevices)

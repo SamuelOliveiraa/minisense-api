@@ -15,20 +15,18 @@ export const getDataStreamsRoute = async (
         description:
           "This route gets all data streams from the data_streams table on the database.",
         response: {
-          200: z.object({
-            data_streams: z
-              .array(
-                z.object({
-                  id: z.uuid(),
-                  key: z.uuid(),
-                  label: z.string().min(2).max(100),
-                  enabled: z.boolean(),
-                  deviceId: z.uuid(),
-                  unitId: z.uuid()
-                })
-              )
-              .describe("Gives an array of data streams")
-          }),
+          200: z
+            .array(
+              z.object({
+                id: z.uuid(),
+                key: z.uuid(),
+                label: z.string().min(2).max(100),
+                enabled: z.boolean(),
+                deviceId: z.uuid(),
+                unitId: z.uuid()
+              })
+            )
+            .describe("Gives an array of data streams"),
           404: z
             .object({
               message: z.string()

@@ -11,15 +11,15 @@ export class DataStreamModel {
     return await db.select().from(dataStreams).orderBy(asc(dataStreams.label));
   }
 
-  // async findByDeviceId(deviceId: string): Promise<DataStream[]> {
-  //   return await db.query.dataStreams.findMany({
-  //     where: and(
-  //       eq(dataStreams.deviceId, deviceId),
-  //       eq(dataStreams.enabled, true)
-  //     ),
-  //     orderBy: asc(dataStreams.label)
-  //   });
-  // }
+  async findByDeviceId(deviceId: string): Promise<DataStream[]> {
+    return await db.query.dataStreams.findMany({
+      where: and(
+        eq(dataStreams.deviceId, deviceId),
+        eq(dataStreams.enabled, true)
+      ),
+      orderBy: asc(dataStreams.label)
+    });
+  }
 
   async findByKey(key: string): Promise<DataStream | null> {
     const dataStream = await db.query.dataStreams.findFirst({
