@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js"
     "dev": "tsx --watch src/server.ts",
     "db:generate": "npx drizzle-kit generate",
     "db:migrate": "npx drizzle-kit migrate",
