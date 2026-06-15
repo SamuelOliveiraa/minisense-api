@@ -8,8 +8,8 @@ O **MiniSense** é uma solução de backend robusta desenvolvida para a gestão 
 
 A API encontra-se implantada e disponível para avaliação no seguinte endereço:
 
-- **Endpoint Base:** [https://link-do-seu-dominio.com](https://link-do-seu-dominio.com)
-- **Documentação Interativa (Swagger):** [https://link-do-seu-dominio.com/docs](https://link-do-seu-dominio.com/docs)
+- **Endpoint Base:** [https://minisense-api-production.up.railway.app/](https://minisense-api-production.up.railway.app/)
+- **Documentação Interativa (Swagger):** [https://minisense-api-production.up.railway.app/docs](https://minisense-api-production.up.railway.app/docs)
 
 ---
 
@@ -17,39 +17,40 @@ A API encontra-se implantada e disponível para avaliação no seguinte endereç
 
 O projeto foi arquitetado priorizando performance, segurança de tipos e manutenibilidade, utilizando as seguintes tecnologias:
 
-- **Ecossistema:** Node.js v20+ com TypeScript.
+- **Ecossistema:** Node.js v20+ com TypeScript (ES Modules).
 - **Framework Web:** [Fastify](https://www.fastify.io/) - Escolhido pela sua altíssima performance e baixo overhead, essencial para aplicações que lidam com ingestão frequente de dados.
 - **Camada de Dados:** [Drizzle ORM](https://orm.drizzle.team/) com PostgreSQL - Utilizado para garantir consultas type-safe e uma integração fluida com o banco de dados relacional.
-- **Validação e Tipagem:** [Zod](https://zod.dev/) - Implementado para validação rigorosa de payloads e parâmetros, garantindo a integridade dos dados na entrada e saída da API.
+- **Validação e Tipagem:** [Zod](https://zod.dev/) - Implementado para validação rigorosa de payloads e parâmetros via `fastify-type-provider-zod`.
 - **Documentação Técnica:** Swagger (OpenAPI 3.0) via `@fastify/swagger` - Gerada automaticamente a partir das definições de rota e schemas Zod.
 
 ---
 
 ## 📋 Modelagem do Domínio
 
-A implementação segue estritamente o modelo de domínio proposto, estruturado da seguinte forma:
+A implementação segue um modelo de domínio estruturado para IoT:
 
 1.  **Users:** Entidade central que detém a propriedade dos dispositivos.
-2.  **Sensor Devices:** Gateways físicos que agrupam diferentes fluxos de coleta de dados.
-3.  **Measurement Units:** Catálogo de unidades de medida (ºC, %, lux, etc.) que padroniza as leituras do sistema.
-4.  **Data Streams:** Representação lógica de um canal de dados específico dentro de um dispositivo (ex: Temperatura). Cada stream é vinculada a uma unidade de medida.
-5.  **Sensor Data:** Registros temporais (time-series) contendo os valores coletados e seus respectivos timestamps.
+2.  **Sensor Devices:** Gateways físicos (dispositivos) vinculados a um usuário.
+3.  **Measurement Units:** Catálogo de unidades de medida (ºC, %, Lux, etc.).
+4.  **Data Streams:** Canais de dados específicos de um dispositivo (ex: Sensor de Temperatura da Sala A).
+5.  **Sensor Data:** Registros temporais (Time-Series) contendo os valores coletados.
 
-A separação de responsabilidades foi aplicada através do padrão **Controller-Model**, facilitando a testabilidade e a evolução independente da lógica de negócio e da camada de persistência.
+A arquitetura segue o padrão **Controller-Model**, garantindo separação de responsabilidades e facilidade de manutenção.
 
 ---
 
 ## 🧪 Estratégia de Qualidade e Testes
 
-A qualidade técnica é garantida por uma suíte de **testes de integração (End-to-End)** abrangente, utilizando **Vitest** e **Supertest**.
+A qualidade técnica é garantida por uma suíte de **testes de integração (End-to-End)** determinísticos:
 
-- **Isolamento de Ambiente:** Utilização de um banco de dados de testes dedicado (`minisense-test`) via Docker.
-- **Ciclo de Vida Controlado:** Migrações automáticas e limpeza completa das tabelas (`beforeEach`) garantem que cada teste seja executado em um estado limpo e previsível.
-- **Cobertura de Cenários:** Foram implementados testes para fluxos de sucesso (Happy Path) e tratamentos rigorosos de erro (Bad Paths), incluindo validações de schemas (400 Bad Request), recursos inexistentes (404 Not Found) e restrições de unicidade.
+- **Execução Sequencial:** O Vitest está configurado para executar os testes em fila única (`maxWorkers: 1`), evitando colisões de dados no banco de dados compartilhado.
+- **Reset Determinístico:** Utilização de um utilitário centralizado (`resetDatabase`) que limpa todas as tabelas na ordem correta de dependências (Foreign Keys) antes de cada teste individual.
+- **Ambiente Isolado:** Banco de dados de testes dedicado via Docker Compose (`db-test`).
+- **Cobertura:** Testes abrangentes para fluxos de criação, listagem, atualização, deleção e tratamentos de erro (400, 404, conflitos de unicidade).
 
 ---
 
-## 🛠️ Instruções para Execução Local
+## 🚀 Instruções para Execução Local
 
 ### 1. Requisitos
 
@@ -65,44 +66,53 @@ cd minisense
 
 # Configuração de ambiente
 cp .env.example .env
+cp .env.test.example .env.test
 
 # Provisionamento da infraestrutura (PostgreSQL)
 docker compose up -d
 
-# Instalação e Migrações
+# Instalação de dependências
 npm install
-npm run db:migrate
+
+# Preparação do Banco de Dados
+npm run db:generate  # Gera as migrações
+npm run db:migrate   # Aplica as migrações no banco local
+
+# População de Dados (Opcional)
+npm run db:seed      # Popula o banco com dados iniciais e medições de exemplo
 
 # Execução em modo desenvolvimento
 npm run dev
-
-# Execução da suíte de testes
-npm test
 ```
+
+### 3. Comandos Disponíveis
+
+| Comando              | Descrição                                                                 |
+| :------------------- | :------------------------------------------------------------------------ |
+| `npm run dev`        | Inicia o servidor em modo watch com `tsx`.                                |
+| `npm run build`      | Compila o projeto para produção usando `tsup`.                            |
+| `npm run db:seed`    | Popula o banco com usuário admin, unidades, sensores e 48 medições reais. |
+| `npm run test`       | Executa os testes de integração uma única vez.                            |
+| `npm run test:watch` | Sobe o banco de teste via Docker e inicia o modo watch do Vitest.         |
+| `npm run db:studio`  | Abre a interface visual do Drizzle para explorar os dados.                |
 
 ---
 
 ## 📖 Documentação Técnica (Swagger UI)
 
-Para uma análise detalhada de todos os contratos, formatos de requisição e modelos de resposta, a API disponibiliza uma interface interativa do **Swagger UI**.
-
-Esta interface permite testar os endpoints diretamente pelo navegador, fornecendo uma visão clara do funcionamento da API e do cumprimento da especificação OpenAPI.
-
-**Acesse em:** `http://localhost:3333/docs`
+Acesse a documentação completa dos endpoints em: `http://localhost:3333/docs`
 
 ### Ferramentas de Teste (API Clients)
 
-Para facilitar a integração e os testes manuais, o projeto disponibiliza coleções prontas para uso nos principais clientes de API:
+O projeto inclui coleções prontas para uso:
 
-- **Insomnia:** Importe o arquivo `insomnia_minisense_export.json` localizado na raiz do projeto.
-- **Postman:** Importe o arquivo `postman_minisense_export.json` localizado na raiz do projeto.
-
-Ambas as coleções já possuem as variáveis de ambiente configuradas para apontar para o servidor local (`http://localhost:3333`).
+- **Insomnia:** `insomnia_minisense_export.json`
+- **Postman:** `postman_minisense_export.json`
 
 ---
 
 ## 🤵 Autor
 
-Este projeto foi desenvolvido como entregável técnico para o desafio de desenvolvedor na empresa **SenseUp**, demonstrando competências em arquitetura de microsserviços, design de APIs RESTful e boas práticas de engenharia de software.
+Este projeto foi desenvolvido como entregável técnico para o desafio de desenvolvedor na empresa **SenseUp**.
 
 ---
