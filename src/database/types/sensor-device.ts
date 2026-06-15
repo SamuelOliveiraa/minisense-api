@@ -1,4 +1,4 @@
-import type { sensorDevices } from "../schema.ts";
+import type { sensorDevices } from "../schema";
 
 export type SensorDevice = typeof sensorDevices.$inferSelect;
 

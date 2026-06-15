@@ -1,4 +1,4 @@
-import type { UserController } from "@/controllers/UserController.ts";
+import type { UserController } from "@/controllers/UserController";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 

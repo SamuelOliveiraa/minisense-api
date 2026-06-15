@@ -1,8 +1,8 @@
-import type { SensorDataPost } from "@/database/types/sensor-data.ts";
-import { SensorDataModel } from "@/model/SensorDataModel.ts";
-import { DataStreamModel } from "@/model/DataStreamModel.ts";
+import type { SensorDataPost } from "@/database/types/sensor-data";
+import { SensorDataModel } from "@/model/SensorDataModel";
+import { DataStreamModel } from "@/model/DataStreamModel";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { env } from "@/env/index.ts";
+import { env } from "@/env/index";
 
 export class SensorDataController {
   #model: SensorDataModel;

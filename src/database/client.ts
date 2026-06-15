@@ -1,6 +1,6 @@
-import { env } from "@/env/index.ts";
+import { env } from "@/env/index";
 import { drizzle } from "drizzle-orm/node-postgres";
-import * as schema from "@/database/schema.ts";
+import * as schema from "@/database/schema";
 import pg from "pg";
 
 const pool = new pg.Pool({

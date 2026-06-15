@@ -1,10 +1,10 @@
-import { UserController } from "@/controllers/UserController.ts";
+import { UserController } from "@/controllers/UserController";
 import type { FastifyInstance } from "fastify";
-import { getUsersRoute } from "./get-users.ts";
-import { postUserRoute } from "./post-user.ts";
-import { deleteUserRoute } from "./delete-user.ts";
-import { getUsersByIdRoute } from "./get-users-by-id.ts";
-import { updateUserRoute } from "./update-user.ts";
+import { getUsersRoute } from "./get-users";
+import { postUserRoute } from "./post-user";
+import { deleteUserRoute } from "./delete-user";
+import { getUsersByIdRoute } from "./get-users-by-id";
+import { updateUserRoute } from "./update-user";
 
 export default async function usersRoute(app: FastifyInstance) {
   const controller = new UserController();

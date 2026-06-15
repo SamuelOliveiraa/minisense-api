@@ -1,9 +1,15 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import supertest, { type Response } from "supertest";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
-import { db } from "../database/client.ts";
-import { app } from "../app.ts";
-import { sensorData, dataStreams, sensorDevices, users, measurementUnits } from "@/database/schema.ts";
+import { db } from "../database/client";
+import { app } from "../app";
+import {
+  sensorData,
+  dataStreams,
+  sensorDevices,
+  users,
+  measurementUnits
+} from "@/database/schema";
 
 describe("Sensor Data routes", () => {
   let streamKey: string;
@@ -30,7 +36,11 @@ describe("Sensor Data routes", () => {
 
     const device = await supertest(app.server)
       .post("/sensor-devices")
-      .send({ label: "Device Data", description: "Desc", userId: user.body.id });
+      .send({
+        label: "Device Data",
+        description: "Desc",
+        userId: user.body.id
+      });
 
     const unit = await supertest(app.server)
       .post("/measurement-units")

@@ -1,4 +1,4 @@
-import type { SensorDeviceController } from "@/controllers/SensorDeviceController.ts";
+import type { SensorDeviceController } from "@/controllers/SensorDeviceController";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 

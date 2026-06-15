@@ -1,9 +1,9 @@
 import type {
   MeasurementUnit,
   MeasurementUnitPost
-} from "@/database/types/measurement-unit.ts";
-import { env } from "@/env/index.ts";
-import { MeasurementUnitModel } from "@/model/MeasurementUnitModel.ts";
+} from "@/database/types/measurement-unit";
+import { env } from "@/env/index";
+import { MeasurementUnitModel } from "@/model/MeasurementUnitModel";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export class MeasurementUnitController {

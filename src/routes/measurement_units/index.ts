@@ -1,10 +1,10 @@
 import type { FastifyInstance } from "fastify";
-import { MeasurementUnitController } from "@/controllers/MeasurementUnitController.ts";
-import { getMeasurementUnitsRoute } from "./get-measurement-unit.ts";
-import { postMeasurementUnitRoute } from "./post-measurement-unit.ts";
-import { getMeasurementUnitByIdRoute } from "./get-measurement-unit-by-id.ts";
-import { deleteMeasurementUnitRoute } from "./delete-measurement-unit.ts";
-import { updateMeasurementUnitRoute } from "./update-measurement-unit.ts";
+import { MeasurementUnitController } from "@/controllers/MeasurementUnitController";
+import { getMeasurementUnitsRoute } from "./get-measurement-unit";
+import { postMeasurementUnitRoute } from "./post-measurement-unit";
+import { getMeasurementUnitByIdRoute } from "./get-measurement-unit-by-id";
+import { deleteMeasurementUnitRoute } from "./delete-measurement-unit";
+import { updateMeasurementUnitRoute } from "./update-measurement-unit";
 
 export default async function measurementUnitsRoute(app: FastifyInstance) {
   const controller = new MeasurementUnitController();

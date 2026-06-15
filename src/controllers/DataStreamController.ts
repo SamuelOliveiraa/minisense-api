@@ -1,10 +1,10 @@
-import type { DataStreamPost } from "@/database/types/data-stream.ts";
+import type { DataStreamPost } from "@/database/types/data-stream";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { env } from "@/env/index.ts";
-import { DataStreamModel } from "@/model/DataStreamModel.ts";
-import { SensorDeviceModel } from "@/model/SensorDeviceModel.ts";
-import { SensorDataModel } from "@/model/SensorDataModel.ts";
-import { MeasurementUnitModel } from "@/model/MeasurementUnitModel.ts";
+import { env } from "@/env/index";
+import { DataStreamModel } from "@/model/DataStreamModel";
+import { SensorDeviceModel } from "@/model/SensorDeviceModel";
+import { SensorDataModel } from "@/model/SensorDataModel";
+import { MeasurementUnitModel } from "@/model/MeasurementUnitModel";
 
 export class DataStreamController {
   #model: DataStreamModel;

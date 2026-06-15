@@ -1,9 +1,9 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import supertest, { type Response } from "supertest";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
-import { db } from "../database/client.ts";
-import { app } from "../app.ts";
-import { measurementUnits } from "@/database/schema.ts";
+import { db } from "../database/client";
+import { app } from "../app";
+import { measurementUnits } from "@/database/schema";
 
 describe("Measurement Units routes", () => {
   beforeAll(async () => {

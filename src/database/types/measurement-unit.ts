@@ -1,4 +1,4 @@
-import type { measurementUnits } from "../schema.ts";
+import type { measurementUnits } from "../schema";
 
 export type MeasurementUnit = typeof measurementUnits.$inferSelect;
 

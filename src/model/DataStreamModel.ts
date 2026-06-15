@@ -1,9 +1,6 @@
-import { db } from "@/database/client.ts";
-import { dataStreams } from "@/database/schema.ts";
-import type {
-  DataStream,
-  DataStreamPost
-} from "@/database/types/data-stream.ts";
+import { db } from "@/database/client";
+import { dataStreams } from "@/database/schema";
+import type { DataStream, DataStreamPost } from "@/database/types/data-stream";
 import { and, asc, eq } from "drizzle-orm";
 
 export class DataStreamModel {

@@ -1,4 +1,4 @@
-import type { DataStreamController } from "@/controllers/DataStreamController.ts";
+import type { DataStreamController } from "@/controllers/DataStreamController";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 

@@ -1,9 +1,6 @@
-import { db } from "@/database/client.ts";
-import { sensorData } from "@/database/schema.ts";
-import type {
-  SensorData,
-  SensorDataPost
-} from "@/database/types/sensor-data.ts";
+import { db } from "@/database/client";
+import { sensorData } from "@/database/schema";
+import type { SensorData, SensorDataPost } from "@/database/types/sensor-data";
 import { count, desc, eq } from "drizzle-orm";
 
 export class SensorDataModel {
