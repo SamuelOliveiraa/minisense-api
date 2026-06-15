@@ -1,257 +1,499 @@
-{
-  "__export_format": 4,
-  "__export_date": "2024-05-20T00:00:00.000Z",
-  "__export_source": "insomnia.desktop.app:v9.0.0",
-  "resources": [
-    {
-      "_id": "wrk_minisense",
-      "parentId": null,
-      "modified": 1716163200000,
-      "created": 1716163200000,
-      "name": "Minisense API",
-      "description": "",
-      "scope": "collection",
-      "_type": "workspace"
-    },
-    {
-      "_id": "env_base",
-      "parentId": "wrk_minisense",
-      "modified": 1716163200000,
-      "created": 1716163200000,
-      "name": "Base Environment",
-      "data": {
-        "base_url": "http://localhost:3333"
-      },
-      "dataPropertyOrder": {
-        "&": ["base_url"]
-      },
-      "color": null,
-      "isPrivate": false,
-      "metaSortKey": 1716163200000,
-      "_type": "environment"
-    },
-    {
-      "_id": "fld_users",
-      "parentId": "wrk_minisense",
-      "name": "Users",
-      "environment": { "resource": "/users" },
-      "_type": "request_group"
-    },
-    {
-      "_id": "fld_units",
-      "parentId": "wrk_minisense",
-      "name": "Measurement Units",
-      "environment": { "resource": "/measurement-units" },
-      "_type": "request_group"
-    },
-    {
-      "_id": "fld_devices",
-      "parentId": "wrk_minisense",
-      "name": "Sensor Devices",
-      "environment": { "resource": "/sensor-devices" },
-      "_type": "request_group"
-    },
-    {
-      "_id": "fld_data",
-      "parentId": "wrk_minisense",
-      "name": "Sensor Data",
-      "environment": { "resource": "/sensor-data" },
-      "_type": "request_group"
-    },
-    {
-      "_id": "fld_streams",
-      "parentId": "wrk_minisense",
-      "name": "Data Streams",
-      "environment": { "resource": "/data-streams" },
-      "_type": "request_group"
-    },
-    {
-      "_id": "req_users_list",
-      "parentId": "fld_users",
-      "url": "{{ _.base_url }}{{ _.resource }}",
-      "name": "List Users",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_users_get",
-      "parentId": "fld_users",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Get User by ID",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_users_create",
-      "parentId": "fld_users",
-      "url": "{{ _.base_url }}{{ _.resource }}",
-      "name": "Create User",
-      "method": "POST",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\"username\": \"John Doe\", \"email\": \"john@example.com\"}"
-      },
-      "_type": "request"
-    },
-    {
-      "_id": "req_users_update",
-      "parentId": "fld_users",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Update User",
-      "method": "PUT",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\"username\": \"John Updated\", \"email\": \"john@example.com\"}"
-      },
-      "_type": "request"
-    },
-    {
-      "_id": "req_users_delete",
-      "parentId": "fld_users",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Delete User",
-      "method": "DELETE",
-      "_type": "request"
-    },
-    {
-      "_id": "req_units_list",
-      "parentId": "fld_units",
-      "url": "{{ _.base_url }}{{ _.resource }}",
-      "name": "List Units",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_units_get",
-      "parentId": "fld_units",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Get Unit by ID",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_units_create",
-      "parentId": "fld_units",
-      "url": "{{ _.base_url }}{{ _.resource }}",
-      "name": "Create Unit",
-      "method": "POST",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\"symbol\": \"°C\", \"description\": \"Celsius\"}"
-      },
-      "_type": "request"
-    },
-    {
-      "_id": "req_units_update",
-      "parentId": "fld_units",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Update Unit",
-      "method": "PUT",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\"symbol\": \"°F\", \"description\": \"Fahrenheit\"}"
-      },
-      "_type": "request"
-    },
-    {
-      "_id": "req_units_delete",
-      "parentId": "fld_units",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Delete Unit",
-      "method": "DELETE",
-      "_type": "request"
-    },
-    {
-      "_id": "req_devices_list",
-      "parentId": "fld_devices",
-      "url": "{{ _.base_url }}{{ _.resource }}",
-      "name": "List Devices",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_devices_get_id",
-      "parentId": "fld_devices",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Get Device by ID",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_devices_get_key",
-      "parentId": "fld_devices",
-      "url": "{{ _.base_url }}{{ _.resource }}/key/:key",
-      "name": "Get Device by Key",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_devices_create",
-      "parentId": "fld_devices",
-      "url": "{{ _.base_url }}{{ _.resource }}",
-      "name": "Create Device",
-      "method": "POST",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\"label\": \"Living Room Sensor\", \"description\": \"Temp sensor\", \"userId\": \"UUID_HERE\"}"
-      },
-      "_type": "request"
-    },
-    {
-      "_id": "req_devices_delete",
-      "parentId": "fld_devices",
-      "url": "{{ _.base_url }}{{ _.resource }}/:id",
-      "name": "Delete Device",
-      "method": "DELETE",
-      "_type": "request"
-    },
-    {
-      "_id": "req_data_get",
-      "parentId": "fld_data",
-      "url": "{{ _.base_url }}{{ _.resource }}/:key",
-      "name": "Get Data by Stream Key",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_data_create",
-      "parentId": "fld_data",
-      "url": "{{ _.base_url }}{{ _.resource }}/:key",
-      "name": "Create Sensor Data",
-      "method": "POST",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\"value\": 25.5, \"timestamp\": 1716163200}"
-      },
-      "_type": "request"
-    },
-    {
-      "_id": "req_streams_list",
-      "parentId": "fld_streams",
-      "url": "{{ _.base_url }}{{ _.resource }}",
-      "name": "List Streams",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_streams_get",
-      "parentId": "fld_streams",
-      "url": "{{ _.base_url }}{{ _.resource }}/:key",
-      "name": "Get Stream by Key",
-      "method": "GET",
-      "_type": "request"
-    },
-    {
-      "_id": "req_streams_create",
-      "parentId": "fld_streams",
-      "url": "{{ _.base_url }}{{ _.resource }}/:deviceKey",
-      "name": "Create Stream",
-      "method": "POST",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\"label\": \"Temperature\", \"unitId\": \"UUID_HERE\"}"
-      },
-      "_type": "request"
-    }
-  ]
-}
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Minisense API
+meta:
+  id: wrk_6e4a1c13171c4dfcadd25daa1fcc0740
+  created: 1781374201539
+  modified: 1781374201539
+  description: ""
+collection:
+  - name: Users
+    meta:
+      id: fld_d54d8961165543ffbf6856e0decded03
+      created: 1781374201544
+      modified: 1781374201544
+      sortKey: -1781374201544
+      description: ""
+    children:
+      - url: "{{ _.base_url }}{{ _.resource }}"
+        name: List Users
+        meta:
+          id: req_b0adec7e71974c8493a7c5d89fbaa84a
+          created: 1781374201550
+          modified: 1781374201550
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201550
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Get User by ID
+        meta:
+          id: req_803115e9fc984949a857777ae4ff21b9
+          created: 1781374201553
+          modified: 1781374201553
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201553
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}"
+        name: Create User
+        meta:
+          id: req_a66405856769422098d83e933df2569f
+          created: 1781374201555
+          modified: 1781499667710
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201555
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username": "Oliveira",
+              "email": "oliveira@teste.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Update User
+        meta:
+          id: req_6a3ef7bb5da747ab8410c44da9685fc7
+          created: 1781374201556
+          modified: 1781374201556
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201556
+        method: PUT
+        body:
+          mimeType: application/json
+          text: '{"username": "John Updated", "email": "john@example.com"}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Delete User
+        meta:
+          id: req_81c3e60dec2d481baf5be33b8afa8b4e
+          created: 1781374201560
+          modified: 1781374201560
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201560
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      resource: /users
+  - name: Measurement Units
+    meta:
+      id: fld_54ad62e97e9944ab8025227f4d036d19
+      created: 1781374201546
+      modified: 1781374201546
+      sortKey: -1781374201546
+      description: ""
+    children:
+      - url: "{{ _.base_url }}{{ _.resource }}"
+        name: List Units
+        meta:
+          id: req_5e2c8a97d18f4b7f8aa1c074d6646c11
+          created: 1781374201561
+          modified: 1781374201561
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201561
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Get Unit by ID
+        meta:
+          id: req_78e4e962108446e788a3731b70bb93a9
+          created: 1781374201562
+          modified: 1781374201562
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201562
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}"
+        name: Create Unit
+        meta:
+          id: req_a38ad8430f544aac91a39f53dc0bea17
+          created: 1781374201563
+          modified: 1781499722068
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201563
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"symbol": "°C",
+            	"description": "Celsius"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Update Unit
+        meta:
+          id: req_c201d20197d1452f8ac8a66283898e65
+          created: 1781374201564
+          modified: 1781374201564
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201564
+        method: PUT
+        body:
+          mimeType: application/json
+          text: '{"symbol": "°F", "description": "Fahrenheit"}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Delete Unit
+        meta:
+          id: req_360a1f674f7f476b87b2dda23e4bdede
+          created: 1781374201565
+          modified: 1781374201565
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201565
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      resource: /measurement-units
+  - name: Sensor Devices
+    meta:
+      id: fld_263e344994064538b5e2a1dda2a87bd6
+      created: 1781374201547
+      modified: 1781374201547
+      sortKey: -1781374201547
+      description: ""
+    children:
+      - url: "{{ _.base_url }}{{ _.resource }}"
+        name: List Devices
+        meta:
+          id: req_6eb2a867bd49411f9ca6214fae9f7144
+          created: 1781374201566
+          modified: 1781374201566
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201566
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Get Device by ID
+        meta:
+          id: req_28813fa2fd164d2d95e4f008e2752522
+          created: 1781374201567
+          modified: 1781374201567
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201567
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/key/3aaf34a3-baf6-4bdc-8174-c78f84dc0ac0"
+        name: Get Device by Key
+        meta:
+          id: req_f5b170a5104a4602846b02589da07cf7
+          created: 1781374201568
+          modified: 1781500431109
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201568
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}"
+        name: Create Device
+        meta:
+          id: req_d7c0f8d11c8047388cd8786190c6d429
+          created: 1781374201580
+          modified: 1781499840341
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201580
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"label": "Sensor da Sala",
+            	"description": "DHT22 instalado no teto",
+            	"userId": "a537c941-6f94-4c9d-b5db-cbaf65dc2c1e"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/:id"
+        name: Delete Device
+        meta:
+          id: req_1c2defb9c3764b0fb1c1a197ec813926
+          created: 1781374201581
+          modified: 1781374201581
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201581
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      resource: /sensor-devices
+  - name: Sensor Data
+    meta:
+      id: fld_2cda85f023634313a333cd01686a8c22
+      created: 1781374201548
+      modified: 1781374201548
+      sortKey: -1781374201548
+      description: ""
+    children:
+      - url: "{{ _.base_url }}{{ _.resource }}/047cf8d8-45e8-4ef2-a03b-84f539a70182"
+        name: Get Data by Stream Key
+        meta:
+          id: req_1ead40911bf5405faf3262793c22c511
+          created: 1781374201582
+          modified: 1781500373247
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201582
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/750ac59a-40f4-4e34-90bf-c6e506ad5a3f"
+        name: Create Sensor Data
+        meta:
+          id: req_cfadba3f4cf34412b61fc5ca72d71239
+          created: 1781374201583
+          modified: 1781500067560
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201583
+        method: POST
+        body:
+          mimeType: application/json
+          text: "    {
+
+            \      \"timestamp\": 1718485200,\ 
+
+            \      \"value\": 24.5
+
+            \    }
+
+            \    "
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      resource: /sensor-data
+  - name: Data Streams
+    meta:
+      id: fld_d498823fe5f748849a6d401321c1f273
+      created: 1781374201549
+      modified: 1781374201549
+      sortKey: -1781374201549
+      description: ""
+    children:
+      - url: "{{ _.base_url }}{{ _.resource }}"
+        name: List Streams
+        meta:
+          id: req_94c9e64b23ab4fab8b9f43d04321d08a
+          created: 1781374201584
+          modified: 1781374201584
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201584
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/047cf8d8-45e8-4ef2-a03b-84f539a70182"
+        name: Get Stream by Key
+        meta:
+          id: req_2471f64ded8b47759ff58f63b97483b4
+          created: 1781374201585
+          modified: 1781500395016
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201585
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}{{ _.resource }}/9241b905-a458-4282-9f9c-e40e6c82e9b6"
+        name: Create Stream
+        meta:
+          id: req_0d1fb6a0ad1e42519065db95640a1ae5
+          created: 1781374201586
+          modified: 1781499988740
+          isPrivate: false
+          description: ""
+          sortKey: -1781374201586
+        method: POST
+        body:
+          mimeType: application/json
+          text: " {
+
+            \ \t\"label\": \"Temperatura Ambiente\",
+
+            \t\"unitId\": \"419e9603-8434-4e0b-9dc7-454b6e869f8c\"
+
+            \ }
+
+            \    "
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      resource: /data-streams
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_ed065bfc23ba2032c1173e8ed89ebe0146f421a6
+    created: 1781374202281
+    modified: 1781374202281
+environments:
+  name: Base Environment
+  meta:
+    id: env_91b40f7bc1e044189991d0eef60f579a
+    created: 1716163200000
+    modified: 1781499572327
+    isPrivate: false
+  data:
+    base_url: https://minisense-api-production.up.railway.app
