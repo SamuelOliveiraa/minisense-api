@@ -1,4 +1,4 @@
-import type { dataStreams } from "../schema";
+import type { dataStreams } from "../schema.js";
 
 export type DataStream = typeof dataStreams.$inferSelect;
 

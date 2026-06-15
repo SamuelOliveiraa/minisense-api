@@ -1,6 +1,9 @@
-import { db } from "@/database/client";
-import { dataStreams } from "@/database/schema";
-import type { DataStream, DataStreamPost } from "@/database/types/data-stream";
+import { db } from "@/database/client.js";
+import { dataStreams } from "@/database/schema.js";
+import type {
+  DataStream,
+  DataStreamPost
+} from "@/database/types/data-stream.js";
 import { and, asc, eq } from "drizzle-orm";
 
 export class DataStreamModel {

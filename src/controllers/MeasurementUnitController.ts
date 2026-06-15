@@ -1,9 +1,9 @@
 import type {
   MeasurementUnit,
   MeasurementUnitPost
-} from "@/database/types/measurement-unit";
-import { env } from "@/env/index";
-import { MeasurementUnitModel } from "@/model/MeasurementUnitModel";
+} from "@/database/types/measurement-unit.js";
+import { env } from "@/env/index.js";
+import { MeasurementUnitModel } from "@/model/MeasurementUnitModel.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export class MeasurementUnitController {

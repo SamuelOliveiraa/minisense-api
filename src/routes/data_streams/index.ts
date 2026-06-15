@@ -1,8 +1,8 @@
-import { DataStreamController } from "@/controllers/DataStreamController";
+import { DataStreamController } from "@/controllers/DataStreamController.js";
 import type { FastifyInstance } from "fastify";
-import { getDataStreamByKeyRoute } from "./get-data-stream-by-key";
-import { getDataStreamsRoute } from "./get-data-streams";
-import { postDataStreamRoute } from "./post-data-stream";
+import { getDataStreamByKeyRoute } from "./get-data-stream-by-key.js";
+import { getDataStreamsRoute } from "./get-data-streams.js";
+import { postDataStreamRoute } from "./post-data-stream.js";
 
 export default async function dataStreamsRoute(app: FastifyInstance) {
   const controller = new DataStreamController();

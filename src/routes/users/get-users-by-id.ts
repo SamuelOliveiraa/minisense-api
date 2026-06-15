@@ -1,4 +1,4 @@
-import type { UserController } from "@/controllers/UserController";
+import type { UserController } from "@/controllers/UserController.js";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 

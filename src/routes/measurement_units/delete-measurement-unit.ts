@@ -1,4 +1,4 @@
-import type { MeasurementUnitController } from "@/controllers/MeasurementUnitController";
+import type { MeasurementUnitController } from "@/controllers/MeasurementUnitController.js";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 

@@ -1,9 +1,9 @@
-import { db } from "@/database/client";
-import { measurementUnits } from "@/database/schema";
+import { db } from "@/database/client.js";
+import { measurementUnits } from "@/database/schema.js";
 import type {
   MeasurementUnit,
   MeasurementUnitPost
-} from "@/database/types/measurement-unit";
+} from "@/database/types/measurement-unit.js";
 import { asc, eq } from "drizzle-orm";
 
 export class MeasurementUnitModel {

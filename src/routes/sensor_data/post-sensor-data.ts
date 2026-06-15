@@ -1,4 +1,4 @@
-import type { SensorDataController } from "@/controllers/SensorDataController";
+import type { SensorDataController } from "@/controllers/SensorDataController.js";
 import type { FastifyInstance } from "fastify";
 import z from "zod";
 

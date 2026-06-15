@@ -1,6 +1,6 @@
-import type { UserPost } from "@/database/types/user";
-import { env } from "@/env/index";
-import { UserModel } from "@/model/UserModel";
+import type { UserPost } from "@/database/types/user.js";
+import { env } from "@/env/index.js";
+import { UserModel } from "@/model/UserModel.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export class UserController {

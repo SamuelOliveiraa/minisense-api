@@ -1,9 +1,9 @@
-import type { SensorDevicePost } from "@/database/types/sensor-device";
-import { env } from "@/env/index";
-import { DataStreamModel } from "@/model/DataStreamModel";
-import { SensorDataModel } from "@/model/SensorDataModel";
-import { SensorDeviceModel } from "@/model/SensorDeviceModel";
-import { UserModel } from "@/model/UserModel";
+import type { SensorDevicePost } from "@/database/types/sensor-device.js";
+import { env } from "@/env/index.js";
+import { DataStreamModel } from "@/model/DataStreamModel.js";
+import { SensorDataModel } from "@/model/SensorDataModel.js";
+import { SensorDeviceModel } from "@/model/SensorDeviceModel.js";
+import { UserModel } from "@/model/UserModel.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export class SensorDeviceController {

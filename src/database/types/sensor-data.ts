@@ -1,4 +1,4 @@
-import type { sensorData } from "../schema";
+import type { sensorData } from "../schema.js";
 
 export type SensorData = typeof sensorData.$inferSelect;
 

@@ -1,14 +1,14 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import supertest, { type Response } from "supertest";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
-import { db } from "../database/client";
-import { app } from "../app";
+import { db } from "../database/client.js";
+import { app } from "../app.js";
 import {
   dataStreams,
   sensorDevices,
   users,
   measurementUnits
-} from "@/database/schema";
+} from "@/database/schema.js";
 
 describe("Data Streams routes", () => {
   let deviceKey: string;

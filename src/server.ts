@@ -1,5 +1,5 @@
-import { app } from "./app";
-import { env } from "./env/index";
+import { app } from "./app.js";
+import { env } from "./env/index.js";
 
 // Local development
 async function startServer() {

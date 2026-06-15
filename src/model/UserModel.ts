@@ -1,6 +1,6 @@
-import { db } from "@/database/client";
-import { users } from "@/database/schema";
-import type { User, UserPost } from "@/database/types/user";
+import { db } from "@/database/client.js";
+import { users } from "@/database/schema.js";
+import type { User, UserPost } from "@/database/types/user.js";
 import { asc, eq } from "drizzle-orm";
 
 export class UserModel {
