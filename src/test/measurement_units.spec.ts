@@ -3,7 +3,7 @@ import supertest, { type Response } from "supertest";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { db } from "../database/client.js";
 import { app } from "../app.js";
-import { measurementUnits } from "@/database/schema.js";
+import { resetDatabase } from "./reset-db.js";
 
 describe("Measurement Units routes", () => {
   beforeAll(async () => {
@@ -16,7 +16,7 @@ describe("Measurement Units routes", () => {
   });
 
   beforeEach(async () => {
-    await db.delete(measurementUnits);
+    await resetDatabase();
   });
 
   describe("POST", () => {

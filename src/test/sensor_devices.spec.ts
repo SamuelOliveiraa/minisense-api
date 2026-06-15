@@ -3,7 +3,7 @@ import supertest, { type Response } from "supertest";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { db } from "../database/client.js";
 import { app } from "../app.js";
-import { sensorDevices, users } from "@/database/schema.js";
+import { resetDatabase } from "./reset-db.js";
 
 describe("Sensor Devices routes", () => {
   let userId: string;
@@ -18,8 +18,7 @@ describe("Sensor Devices routes", () => {
   });
 
   beforeEach(async () => {
-    await db.delete(sensorDevices);
-    await db.delete(users);
+    await resetDatabase();
 
     const userResponse = await supertest(app.server)
       .post("/users")
