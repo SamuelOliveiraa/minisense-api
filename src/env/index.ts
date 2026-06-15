@@ -3,7 +3,9 @@ import { z } from "zod";
 
 const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
 
-config({ path: envFile });
+if (process.env.NODE_ENV !== "production") {
+  config({ path: envFile });
+}
 
 const envSchema = z.object({
   DATABASE_URL: z.string(),
