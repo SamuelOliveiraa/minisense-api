@@ -4,7 +4,7 @@
   "description": "",
   "main": "server",
   "scripts": {
-    "build": "npm run db:migrate && tsc",
+    "build": "tsup src/server.ts --format esm --clean",
     "start": "node dist/server.js",
     "dev": "tsx --watch src/server",
     "db:generate": "npx drizzle-kit generate",
@@ -26,6 +26,7 @@
     "fastify": "^5.8.5",
     "fastify-type-provider-zod": "^6.1.0",
     "pg": "^8.21.0",
+    "tsconfig-paths": "^4.2.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "cross-env": "^10.1.0",
     "drizzle-kit": "^0.31.10",
     "supertest": "^7.2.2",
+    "tsup": "^8.5.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vite-tsconfig-paths": "^6.1.1",
